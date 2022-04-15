@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="test.gdpu.mybatis.dao.ClassMapper">
+    <select id="queryClassWithStudents" resultMap="queryClassWithStudents">
+        select student.*, class.id as cid, class.name
+        from student,class
+        where student.class_id=class.id and class.id=#{id}
+    </select>
+    <resultMap id="queryClassWithStudents" type="test.gdpu.mybatis.pojo.Class">
+        <id property="id" column="cid"/>
+        <result property="name" column="name"/>
+        <collection property="students" ofType="test.gdpu.mybatis.pojo.Student">
+            <id property="id" column="id"/>
+            <result property="stuName" column="stuName"/>
+            <result property="class_id" column="class_id"/>
+        </collection>
+    </resultMap>
+    
+</mapper>   
